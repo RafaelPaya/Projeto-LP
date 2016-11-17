@@ -1,4 +1,4 @@
-# Projeto-LP
+# Projeto-LP -  Symbolic Algebra
 
 ## Alunos: 
 
