@@ -1,6 +1,8 @@
-#lang racket
-
-(define table (make-hash))
+; Essa parte foi considerada a mais importante e difícil de todo o projeto, o maior problema desse
+;capítulo foi aprender e implementar a noção de tabelas e refazer todo o esquema de processos genéricos. 
+;Tivemos que nos aprofundar no capítulo 3.3.3 e 2.5.2 para ter acesso aos conceitos de tabela e ao conjunto
+;de processos genéricos, seria uma releitua de boa parte do livro se boa parte dos pacotes não fossem feitos
+;no ex-2.78, este tornou viável todo o projeto.
 
 (define (put op type item)
   (hash-set! table (list op type) item))
@@ -22,6 +24,8 @@
   (cond ((pair? datum) (cdr datum))
         ((number? datum) datum)
         (else (error "Bad tagged datum - CONTENTS" datum))))
+        
+(define table (make-hash))
 
 (define (apply-generic op . args)
   (let ((type-tags (map type-tag args)))
