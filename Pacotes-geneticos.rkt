@@ -42,6 +42,7 @@
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
 (define (div x y) (apply-generic 'div x y))
+(define (neg x) (apply-generic 'neg x))
 
 ;scheme number package:
 
@@ -55,6 +56,8 @@
        (lambda (x y) (tag (* x y))))
   (put 'div '(scheme-number scheme-number)
        (lambda (x y) (tag (/ x y))))
+  (put 'neg '(scheme-number)
+       (lambda (x) (tag (* x -1))))
 
   (put 'make 'scheme-number
        (lambda (x) (tag x)))
@@ -87,6 +90,9 @@
   (define (div-rat x y)
     (make-rat (* (numer x) (denom y))
               (* (denom x) (numer y))))
+  (define (neg-rat x)
+    (make-rat (* (numer x) -1)
+              (denom x)))
 
   (define (tag x) (attach-tag 'rational x))
   (put 'add '(rational rational)
@@ -97,6 +103,8 @@
        (lambda (x y) (tag (mul-rat x y))))
   (put 'div '(rational rational)
        (lambda (x y) (tag (div-rat x y))))
+  (put 'neg '(rational)
+       (lambda (x) (tag (neg-rat x))))
   (put 'make 'rational
        (lambda (n d) (tag (make-rat n d))))
   'done)
@@ -185,6 +193,9 @@
   (define (div-complex z1 z2)
     (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
                        (- (angle z1) (angle z2))))
+  (define (neg-complex z1)
+    (make-from-real-imag (* (real-part z1) -1)
+                         (* (imag-part z1) -1)))
 
   (define (tag x) (attach-tag 'complex x))
   (put 'real-part '(complex) real-part)
@@ -199,6 +210,8 @@
        (lambda (z1 z2) (tag (mul-complex z1 z2))))
   (put 'div '(complex complex)
        (lambda (z1 z2) (tag (div-complex z1 z2))))
+  (put 'neg '(complex)
+       (lambda (z1) (tag (neg-complex z1))))
   (put 'make-from-real-imag 'complex
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'complex
