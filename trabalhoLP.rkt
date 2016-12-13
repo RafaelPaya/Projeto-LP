@@ -31,7 +31,7 @@
   
   (define (empty-termlist? term-list) (null? term-list))
   
-  (define (make-term order coeff) (cons order coeff)) ;;; list ou cons?
+  (define (make-term order coeff) (cons order coeff))
   
   (define (add-terms L1 L2)
     (cond ((empty-termlist? L1) L2)
@@ -80,6 +80,9 @@
                               (term-list p2)))
         (error "Polys not in same var -- MUL-POLY"
                (list p1 p2))))
+               
+   (define (make-polynomial var terms)
+     ((get 'make 'polynomial) var terms))
   
   (define (tag p) (attach-tag 'polynomial p))
   (put 'add '(polynomial polynomial) 
@@ -89,11 +92,3 @@
   (put 'make 'polynomial
        (lambda (var terms) (tag (make-poly var terms))))
   'done)
-
-
-
-
-; duvida add e mul(acho que sei a diferença mas nao de onde importar)
-; nao entendo nada da parte final (define (tag p) ...)
-; nao duvida! dificuldade com mul-poly(continuar pensando)
-; duvida no trecho acima de ex 2.87
