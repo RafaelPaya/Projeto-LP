@@ -1,4 +1,4 @@
-#lang racket
+; Neste o código estava parcialmente feito, foi necessário desenvolver o processo de divisão e uma saida
 
 (define (div-terms L1 L2)
   (if (empty-termlist? L1)
@@ -12,9 +12,9 @@
               (let ((rest-of-result
                      (div-terms (sub L1 
                                      (mul-poly L2
-                                                  (make-term new-o
-                                                             new-c)))
-                                L2))
-                                         
-                <form complete result>;;;complementar saida
-                ))))))
+                                               (make-term new-o
+                                                          new-c)))
+                                L2)))
+                (list (adjoin-term (make-term new-o new-c) 
+                                   (car rest-of-result)) 
+                      (cadr rest-of-result))))))))
