@@ -1,4 +1,5 @@
-#lang racket
+; Neste momento foi apresentado uma outra forma de representar polinômios chamada de forma densa, so foi
+;necessário mudar algumas coisas no código conforme pedido no exercício.
 
 (define (adjoin-term term terms-list)
   (if (=zero? term)
