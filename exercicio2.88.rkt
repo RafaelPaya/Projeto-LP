@@ -1,4 +1,6 @@
-#lang racket
+; Esse exercício foi facilitado quando percebemos que não era necessário refazer tudo do zero. Era possível
+;utilizar a função add se fosse mudado os sinais de todos os coeficientes do polinômio que era subtraido, o que tornou
+;rápido e simples.
 
 (put 'neg '(polynomial)
      (lambda (p) (tag (neg-poly p))))
