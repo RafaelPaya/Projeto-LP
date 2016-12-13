@@ -1,4 +1,4 @@
-#lang racket
+;este é o conjunto de funções que é dado logo no início do cap-2.5.3
 
 (define (install-polynomial-package)
   
