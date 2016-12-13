@@ -1,4 +1,6 @@
-#lang racket
+; Essa funções é interessante pois ela testa se o polinômio é nulo verificando se é uma lista vazia
+;ou se todos os coeficientes são nulos. Neste momento que a tabela e os processos genéricos se fazem
+;importantes, independente do tipo do coeficiente(racional, complexo, etc...) nós somos capazes de verificar se é nulo.
 
 (put '=zero? '(polynomial)
      (lambda (p) (zero-aux p)))
