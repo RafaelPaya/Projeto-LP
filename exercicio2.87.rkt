@@ -5,7 +5,6 @@
 (put '=zero? '(polynomial)
      (lambda (p) (zero-aux p)))
 
-
 (define (zero-aux p)
   (or (null? (term-list p))
       (and (=zero? (coeff (first-term (term-list p))))
