@@ -41,16 +41,13 @@
        (lambda (n d) (tag (make-rat n d))))
   'done)
 
-(define (make-rational n d)
-  ((get 'make 'rational) n d))
+; tendo o código em funcionamento ele é capaz de executar:
 
-(define (real-part z) (apply-generic 'real-part z))
-(define (imag-part z) (apply-generic 'imag-part z))
-(define (magnitude z) (apply-generic 'magnitude z))
-(define (angle z) (apply-generic 'angle z))
+(define p1 (make-polynomial 'x '((2 1) (0 1))))
+(define p2 (make-polynomial 'x '((3 1) (0 1))))
 
-(define (make-from-real-imag x y)
-  ((get 'make-from-real-imag 'rectangular) x y))
+(define rf (make-rational p1 p2))
+(define rf2 (add rf rf))
 
-(define (make-from-mag-ang r a)
-  ((get 'make-from-mag-ang 'polar) r a))
+(printf "~a~%" rf)
+(printf "~a~%" rf2)
