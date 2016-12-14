@@ -1,5 +1,3 @@
-#lang racket
-
 ; Esse exercício requeriu que fosse feita uma substituição de funções como + e - por
 ;suas genéricas add e sub, entre outras, além de agora usar o gdc para simplificar as frações.
 
