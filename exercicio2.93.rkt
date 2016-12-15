@@ -1,5 +1,3 @@
-#lang racket
-
 ; Esse exercício requeriu que fosse feita uma substituição de funções como + e - por
 ;suas genéricas add e sub, entre outras, além de agora usar o gdc para simplificar as frações.
 
@@ -56,3 +54,11 @@
 
 (define (make-from-mag-ang r a)
   ((get 'make-from-mag-ang 'polar) r a))
+
+;; Agora conseguimos executar algumas operações como:
+
+(define p1 (make-polynomial 'x '((2 1) (0 1))))
+(define p2 (make-polynomial 'x '((3 1) (0 1))))
+
+(define rf (make-rational p1 p2))
+(define rf2 (add rf rf))
