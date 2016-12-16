@@ -1,11 +1,11 @@
-* Pacotes genéricos e tabelas
+* Pacotes genéricos e tabelas:
  
  
  Essa parte foi considerada a mais importante e difícil de todo o projeto, o maior desafio desse
 capítulo foi: 
  1. Aprender e implementar a noção de tabelas 
  2. Refazer todo o esquema de processos genéricos. 
-Tivemos que nos aprofundar no capítulo =3.3.3= para o item 1, 2.4 e 2.5 para solucionar o item 2.
+Tivemos que nos aprofundar no capítulo 3.3.3 para o item 1, 2.4 e 2.5 para solucionar o item 2.
 
 ** 1.
 
@@ -21,7 +21,6 @@ ainda fomos capazes de otimizar os processos =lookup= e =insert!= usando apenas 
   (hash-ref table (list op type)))
   
 (define table (make-hash))
-
 #+END_EXAMPLE
 
  As quatro funções abaixo foram desenvolvidas no capítulo 2.4:
@@ -49,7 +48,6 @@ ainda fomos capazes de otimizar os processos =lookup= e =insert!= usando apenas 
       (if proc
           (apply proc (map contents args))
           (error "No method for these types - APPLY-GENERIC" (list op type-tags))))))
-
 #+END_EXAMPLE
 
  Lembrando que o papel das funções apresentadas acima é fazer uma procura na tabela, a partir de informações
@@ -100,7 +98,6 @@ Scheme number package:
 
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))
-
 #+END_EXAMPLE
 
 Rational numbers:
@@ -149,7 +146,6 @@ Rational numbers:
 
 (define (make-rational n d)
   ((get 'make 'rational) n d))
-
 #+END_EXAMPLE
 
  Definições para trabalhar tanto com a forma retangular quanto polar, também temos os 
@@ -216,7 +212,6 @@ Rational numbers:
   (put 'make-from-mag-ang 'polar
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
-
 #+END_EXAMPLE
 Agora, finalmente, o complex package:
 
@@ -270,7 +265,6 @@ Agora, finalmente, o complex package:
 
 (define (make-complex-from-mag-ang r a)
   ((get 'make-from-mag-ang 'complex) r a))
-
 #+END_EXAMPLE
 
  Com tudo isso feito já podemos chamar os pacotes e começar a executar, Lembrando que ainda
@@ -283,5 +277,4 @@ temos o =polynomial-package= para unir a isso ao final do trabalho:
 (install-rectangular-package)
 (install-polar-package)
 (install-complex-package)
-
 #+END_EXAMPLE
