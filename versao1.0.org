@@ -55,8 +55,8 @@ Scheme number package:
        (lambda (x y) (tag (* x y))))
   (put 'div '(scheme-number scheme-number)
        (lambda (x y) (tag (/ x y))))
-  (put 'neg '(scheme-number)
-       (lambda (x) (tag (* x -1))))
+  (put '=zero? '(scheme-number)
+       (lambda (x) (tag (= 0 x))))
   (put 'neg '(scheme-number)
        (lambda (x) (tag (- x))))
 
@@ -321,7 +321,16 @@ Dados do livro:
                               (term-list p2)))
         (error "Polys not in same var -- MUL-POLY"
                (list p1 p2))))
+               
+   (define (terms-zero? terms)
+     (if (empty-termlist? terms)
+         true
+         (and (=zero? (coeff (first-term terms)))
+              (terms-zero? (rest-terms terms)))))
 
+  (define (poly-zero? p)
+    (terms-zero? (term-list p)))
+  
   (define (div-terms L1 L2)
     (if (empty-termlist? L1)
         (list (the-empty-termlist) (the-empty-termlist))
@@ -380,6 +389,8 @@ Dados do livro:
        (lambda (p) (tag (negate-poly p))))
   (put 'sub '(polynomial polynomial)
        (lambda (p1 p2) (tag (sub-poly p1 p2))))
+  (put '=zero? '(polynomial)
+       (lambda (p1) (poly-zero? p1)))
   (put 'div '(polynomial polynomial)
     (lambda (p1 p2) 
       (let ((div-result (div-poly p1 p2)))
