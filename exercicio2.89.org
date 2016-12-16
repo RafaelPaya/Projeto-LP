@@ -1,0 +1,27 @@
+ Neste momento foi apresentado uma outra forma de representar polinômios chamada de forma densa, ela nao ignora os 
+termos que não aparecem por ter coeficiente zero. Usando =x²+1= como exemplo:
+
+Forma escassa: ='(x (2 1) (0 1))=
+
+Forma densa: ='(x (1 0 1))=
+
+Na densa não pulamos termo. Só foi necessário mudar algumas coisas na leitura que o código faz, conforme pedido no exercício.
+
+#+BEGIN_EXAMPLE
+
+(define (adjoin-term term terms-list)
+  (if (=zero? term)
+      terms-list
+      (cons term terms-list)))
+
+(define (the-empty-termlist) '())
+
+(define (first-term terms-list)
+  (list (- (length terms-list) 1) (car terms-list)))
+
+(define (rest-terms terms-list) (cdr terms-list))
+
+(define (empty-termlist? terms-list) (null? terms-list))
+
+(define (make-term coeff) (list coeff))
+#+END_EXAMPLE
