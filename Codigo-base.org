@@ -1,4 +1,4 @@
-** Aritimética para os Polinômios:
+** Aritmética para os Polinômios:
 
 Este é o conjunto de funções que é dado logo no início do cap-2.5.3, todos pertencem
 ao =polynomial-package=
