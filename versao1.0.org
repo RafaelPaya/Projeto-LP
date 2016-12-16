@@ -34,7 +34,7 @@ União dos codigos feitos para efetuar testes:
 
 (define (square a) (* a a))
 
-;generic arithmemtic procedures:
+Generic arithmemtic procedures:
 
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
@@ -43,7 +43,7 @@ União dos codigos feitos para efetuar testes:
 (define (neg x) (apply-generic 'neg x))
 (define (=zero? x) (apply-generic '=zero? x))
 
-;scheme number package:
+Scheme number package:
 
 (define (install-scheme-number-package)
   (define (tag x) (attach-tag 'scheme-number x))
@@ -68,7 +68,7 @@ União dos codigos feitos para efetuar testes:
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))
 
-;rational numbers:
+Rational numbers:
 
 (define (install-rational-package)
 
@@ -133,7 +133,7 @@ União dos codigos feitos para efetuar testes:
 (define (make-from-mag-ang r a)
   ((get 'make-from-mag-ang 'polar) r a))
 
-;rectangular package:
+Rectangular package:
 
 (define (install-rectangular-package)
   (define (real-part z) (car z))
@@ -158,7 +158,7 @@ União dos codigos feitos para efetuar testes:
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
 
-;polar package:
+Polar package:
 
 (define (install-polar-package)
   (define (magnitude z) (car z))
@@ -183,7 +183,7 @@ União dos codigos feitos para efetuar testes:
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
 
-;complex package:
+Complex package:
 
 (define (install-complex-package)
   (define (make-from-real-imag x y)
@@ -240,14 +240,10 @@ União dos codigos feitos para efetuar testes:
 (install-polar-package)
 (install-complex-package)
 
-;Dados do livro:
-
-
+Dados do livro:
   
 (define (install-polynomial-package)
-  ;; internal procedures
-  
-  ;; representation of poly
+
   (define (make-poly variable term-list)
     (cons variable term-list))
   (define (variable p) (car p))
