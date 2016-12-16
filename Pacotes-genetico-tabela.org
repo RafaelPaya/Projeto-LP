@@ -1,10 +1,13 @@
+*Pacotes genéricos e tabelas
+ 
+ 
  Essa parte foi considerada a mais importante e difícil de todo o projeto, o maior desafio desse
 capítulo foi: 
  1. Aprender e implementar a noção de tabelas 
  2. Refazer todo o esquema de processos genéricos. 
 Tivemos que nos aprofundar no capítulo =3.3.3= para o item 1, 2.4 e 2.5 para solucionar o item 2.
 
-**1.
+** 1.
 
  Durante a pesquisa sobre representação de tabelas (3.3.3) conseguimos implementar as funções abaixo, e
 ainda fomos capazes de otimizar os processos =lookup= e =insert!= usando apenas =hash-ref= e =hash=set!=:
@@ -69,7 +72,7 @@ que serão a chave para indentificar qual código correta para a operação.
 (define (square a) (* a a))
 #+END_EXAMPLE
 
-**2.
+** 2.
 
  Agora vamos começar a desenvolver os pacotes do capítulo 2.5 para poder expandir nossas operações
 do =polynimial-package=:
