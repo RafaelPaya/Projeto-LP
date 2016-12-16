@@ -73,7 +73,7 @@ que serão a chave para indentificar qual código correta para a operação.
 ** 2.
 
  Agora vamos começar a desenvolver os pacotes do capítulo 2.5 para poder expandir nossas operações
-do =polynimial-package=:
+do =polynomial-package=:
  
 Scheme number package:
 
