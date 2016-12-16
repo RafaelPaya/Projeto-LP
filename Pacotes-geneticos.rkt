@@ -1,14 +1,29 @@
-; Essa parte foi considerada a mais importante e difícil de todo o projeto, o maior problema desse
-;capítulo foi aprender e implementar a noção de tabelas e refazer todo o esquema de processos genéricos. 
-;Tivemos que nos aprofundar no capítulo 3.3.3 e 2.5.2 para ter acesso aos conceitos de tabela e ao conjunto
-;de processos genéricos, seria uma releitua de boa parte do livro se boa parte dos pacotes não fossem feitos
-;no ex-2.78, este tornou viável todo o projeto.
+ Essa parte foi considerada a mais importante e difícil de todo o projeto, o maior desafio desse
+capítulo foi: 
+ 1. Aprender e implementar a noção de tabelas 
+ 2. Refazer todo o esquema de processos genéricos. 
+Tivemos que nos aprofundar no capítulo =3.3.3= para o item 1, 2.4 e 2.5 para solucionar o item 2.
+
+**1.
+
+ Durante a pesquisa sobre representação de tabelas (3.3.3) conseguimos implementar as funções abaixo, e
+ainda fomos capazes de otimizar os processos =lookup= e =insert!= usando apenas =hash-ref= e =hash=set!=:
+
+#+BEGIN_EXAMPLE
 
 (define (put op type item)
   (hash-set! table (list op type) item))
 
 (define (get op type)
   (hash-ref table (list op type)))
+  
+(define table (make-hash))
+
+#+END_EXAMPLE
+
+ As quatro funções abaixo foram desenvolvidas no capítulo 2.4:
+
+#+BEGIN_EXAMPLE
 
 (define (attach-tag type-tag contents)
   (if (equal? type-tag 'scheme-number)
@@ -24,8 +39,6 @@
   (cond ((pair? datum) (cdr datum))
         ((number? datum) datum)
         (else (error "Bad tagged datum - CONTENTS" datum))))
-        
-(define table (make-hash))
 
 (define (apply-generic op . args)
   (let ((type-tags (map type-tag args)))
@@ -34,17 +47,36 @@
           (apply proc (map contents args))
           (error "No method for these types - APPLY-GENERIC" (list op type-tags))))))
 
-(define (square a) (* a a))
+#+END_EXAMPLE
 
-;generic arithmemtic procedures:
+ Lembrando que o papel das funções apresentadas acima é fazer uma procura na tabela, a partir de informações
+dadas a elas, assim escolhendo o processo genérico correto a ser aplicado numa operação,essa escolha vai ser
+definida pelas informações dadas de type e processo.
+ 
+ Como exemplo: =(add '(polynomial x (1 3) (0 1)))= nesse casso temos o processo =add= e o tipo =polynomial=
+que serão a chave para indentificar qual código correta para a operação.
+
+ Agora definimos alguns desses processo aritméticos genéricos: 
+#+BEGIN_EXAMPLE
 
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
 (define (div x y) (apply-generic 'div x y))
 (define (neg x) (apply-generic 'neg x))
+(define (=zero? x) (apply-generic '=zero? x))
 
-;scheme number package:
+(define (square a) (* a a))
+#+END_EXAMPLE
+
+**2.
+
+ Agora vamos começar a desenvolver os pacotes do capítulo 2.5 para poder expandir nossas operações
+do =polynimial-package=:
+ 
+Scheme number package:
+
+#+BEGIN_EXAMPLE
 
 (define (install-scheme-number-package)
   (define (tag x) (attach-tag 'scheme-number x))
@@ -58,7 +90,6 @@
        (lambda (x y) (tag (/ x y))))
   (put 'neg '(scheme-number)
        (lambda (x) (tag (* x -1))))
-
   (put 'make 'scheme-number
        (lambda (x) (tag x)))
 
@@ -67,7 +98,11 @@
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))
 
-;rational numbers:
+#+END_EXAMPLE
+
+Rational numbers:
+
+#+BEGIN_EXAMPLE
 
 (define (install-rational-package)
   (define (numer x) (car x))
@@ -112,6 +147,13 @@
 (define (make-rational n d)
   ((get 'make 'rational) n d))
 
+#+END_EXAMPLE
+
+ Definições para trabalhar tanto com a forma retangular quanto polar, também temos os 
+=rectangular-package= e o =polar-package= abaixo:
+
+#+BEGIN_EXAMPLE
+
 (define (real-part z) (apply-generic 'real-part z))
 (define (imag-part z) (apply-generic 'imag-part z))
 (define (magnitude z) (apply-generic 'magnitude z))
@@ -123,7 +165,7 @@
 (define (make-from-mag-ang r a)
   ((get 'make-from-mag-ang 'polar) r a))
 
-;rectangular package:
+
 
 (define (install-rectangular-package)
   (define (real-part z) (car z))
@@ -148,7 +190,6 @@
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
 
-;polar package:
 
 (define (install-polar-package)
   (define (magnitude z) (car z))
@@ -173,7 +214,10 @@
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
 
-;complex package:
+#+END_EXAMPLE
+Agora, finalmente, o complex package:
+
+#+BEGIN_EXAMPLE
 
 (define (install-complex-package)
   (define (make-from-real-imag x y)
@@ -224,8 +268,17 @@
 (define (make-complex-from-mag-ang r a)
   ((get 'make-from-mag-ang 'complex) r a))
 
+#+END_EXAMPLE
+
+ Com tudo isso feito já podemos chamar os pacotes e começar a executar, Lembrando que ainda
+temos o =polynomial-package= para unir a isso ao final do trabalho:
+
+#+BEGIN_EXAMPLE
+
 (install-scheme-number-package)
 (install-rational-package)
 (install-rectangular-package)
 (install-polar-package)
 (install-complex-package)
+
+#+END_EXAMPLE
