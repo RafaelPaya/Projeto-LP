@@ -1,5 +1,9 @@
-;este é o conjunto de funções que é dado logo no início do cap-2.5.3
+** Aritimética para os Polinômios:
 
+Este é o conjunto de funções que é dado logo no início do cap-2.5.3, todos pertencem
+ao =polynomial-package=
+
+#+BEGIN_EXAMPLE
 (define (install-polynomial-package)
   
   (define (make-poly variable term-list)
@@ -93,5 +97,12 @@
        (lambda (var terms) (tag (make-poly var terms))))
   'done)
   
-  (define (make-polynomial var terms)
-  ((get 'make 'polynomial) var terms))
+  
+(define (make-polynomial var terms)
+((get 'make 'polynomial) var terms))
+
+#+END_EXAMPLE
+
+
+
+
