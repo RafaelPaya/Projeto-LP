@@ -1,0 +1,35 @@
+ Esse exercício foi facilitado quando percebemos que não era necessário refazer tudo do zero. Era possível
+utilizar a função =add= se fosse mudado os sinais de todos os coeficientes do polinômio que era subtraido, o que tornou
+rápido e simples.
+
+ Colocamos nas definições:
+#+BEGIN_EXAMPLE
+
+(define (neg x) (apply-generic 'neg x))
+#+END_EXAMPLE
+
+ Colocamos no =polynomial-package=:
+#+BEGIN_EXAMPLE
+
+(define (negate-terms terms)
+  (if (empty-termlist? terms)
+    (the-empty-termlist)
+    (let ((first (first-term terms)))
+      (adjoin-term 
+        (make-term (order first) (neg (coeff first)))
+        (negate-terms (rest-terms terms))))))
+
+(define (negate-poly p)
+  (make-poly 
+    (variable p)
+    (negate-terms (term-list p))))
+
+(put 'neg '(polynomial)
+  (lambda (p) (tag (negate-poly p))))
+
+(define (sub-poly p1 p2)
+  (add-poly p1 (negate-poly p2)))
+
+(put 'sub '(polynomial polynomial)
+  (lambda (p1 p2) (tag (sub-poly p1 p2))))
+#+END_EXAMPLE
