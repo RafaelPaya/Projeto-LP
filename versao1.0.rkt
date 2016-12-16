@@ -1,6 +1,6 @@
-#lang racket
+União dos codigos feitos para efetuar testes:
 
-;união dos codigos feitos para efetuar testes
+#+BEGIN_EXAMPLE
 
 (define (put op type item)
   (hash-set! table (list op type) item))
@@ -396,3 +396,4 @@
   ((get 'make 'polynomial) var terms))
 
 (install-polynomial-package)
+#+END_EXAMPLE
