@@ -239,7 +239,7 @@ União dos codigos feitos para efetuar testes:
     (and (variable? v1) (variable? v2) (eq? v1 v2)))
 
   (define (adjoin-term term term-list)
-    (if (null? (coeff term))
+    (if (=zero? (coeff term))
         term-list
         (cons term term-list)))
 
