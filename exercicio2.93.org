@@ -1,12 +1,13 @@
-; Esse exercício requeriu que fosse feita uma substituição de funções como + e - por
-;suas genéricas add e sub, entre outras, além de agora usar o gdc para simplificar as frações.
+ Esse exercício requeriu que fosse feita uma substituição de funções como + e - por
+suas genéricas add e sub, por exemplo, agora podemos fazer as operações básicas.
+
+#+BEGIN_EXAMPLE
 
 (define (install-rational-package)
   (define (numer x) (car x))
   (define (denom x) (cdr x))
   (define (make-rat n d)
-    (let ((g (gcd n d)))
-      (cons (/ n g) (/ d g))))
+    (cons n d))
 
   (define (add-rat x y)
     (make-rat (add (mul (numer x) (denom y))
@@ -54,11 +55,15 @@
 
 (define (make-from-mag-ang r a)
   ((get 'make-from-mag-ang 'polar) r a))
+#+END_EXAMPLE
 
-;; Agora conseguimos executar algumas operações como:
+Agora conseguimos executar algumas operações como:
+
+#+BEGIN_EXAMPLE
 
 (define p1 (make-polynomial 'x '((2 1) (0 1))))
 (define p2 (make-polynomial 'x '((3 1) (0 1))))
 
 (define rf (make-rational p1 p2))
 (define rf2 (add rf rf))
+#+END_EXAMPLE
