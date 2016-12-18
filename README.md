@@ -14,4 +14,5 @@ Implementação da seção 2.5.3 do livro SICP,
 
 cujo o objetivo é montar as funções e resolver os exercícios.
 
-OBS: tudo desenvolvido nesse trabalho é unido na versão final para executar completamente.
+OBS: Foi criada uma pasta versão final, nela tem a união de todas as partes do código feito
+e também existe uma pasta instruções com informações sobre o código.
