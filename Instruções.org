@@ -11,13 +11,24 @@ alguns teste que podem ser feitos com esse pacote são:
 #+BEGIN_EXAMPLE
 
 (define p1 (make-polynomial 'x '((2 1) (1 -2) (0 1))))
+
 (define p2 (make-polynomial 'x '((1 1) (0 -1))))
+
 (add p1 p2)
+
 (sub p1 p2)
+
 (mul p1 p2)
+
 (div p1 p2)
+
+(define p3 (make-rational p1 p2))
+
 (greatest-common-divisor p1 p2)
+
 (equ? (make-rational 6 4)
       (make-rational 3 2))
-
+.
+.
+.
 #+END_EXAMPLE
