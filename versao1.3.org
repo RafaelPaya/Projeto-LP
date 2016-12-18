@@ -78,8 +78,7 @@ União dos codigos feitos para efetuar testes:
       (equ? (denom x) (denom y))))
 
   (define (make-rat n d)
-    (let ((g (gcd n d)))
-      (cons (/ n g) (/ d g))))
+    (cons n d))
 
   (define (add-rat x y)
     (make-rat (add  (mul (numer x) (denom y))
